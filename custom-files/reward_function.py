@@ -1,33 +1,81 @@
+import numpy as np
+import math
+
+action_space = [
+        {"steering_angle": -30, "speed": 1.2},
+        {"steering_angle": -15, "speed": 2.0},
+        {"steering_angle": 0,   "speed": 2.0},
+        {"steering_angle": 5,   "speed": 2.0},
+        {"steering_angle": 15,  "speed": 1.2},
+        {"steering_angle": 30,  "speed": 1.2}
+]
+
+def getTrackDirection(waypoints, closest_waypoints):
+    # Calculate the direction of the center line based on the closest waypoints
+    next_point = waypoints[closest_waypoints[1]]
+    prev_point = waypoints[closest_waypoints[0]]
+    
+    # Calculate the direction in radius, arctan2(dy, dx), the result is (-pi, pi) in radians
+    track_direction = math.atan2(next_point[1] - prev_point[1], next_point[0] - prev_point[0])
+    # Convert to degree
+    return math.degrees(track_direction)
+
+def getDirectionDiff(track_direction, heading):
+    # Calculate the difference between the track direction and the heading direction of the car
+    direction_diff = abs(track_direction - heading)
+    if direction_diff > 180:
+        direction_diff = 360 - direction_diff
+        
+    return direction_diff
+
+def curveSpeedPenalty(direction_diff, speed, reward):  #combinar con lo de dav id, chequear reinforment positivo
+  #if the car isnt going staight, and the speed is 
+    threshold = 15
+    for space in action_space:
+        if direction_diff == space["steering_angle"] and speed == space['speed']:
+            reward += 20
+        elif direction_diff - threshold > space["steering_angle"] >  direction_diff + threshold: 
+            threshold = 0.25
+            if space['speed'] - threshold > speed > space['speed'] + threshold:
+                reward += 10
+            else:
+                reward -= 10
+            return reward
+    return reward
+
+
+
+def _getClosestWaypoints(params):
+    # closest_waypoints
+    # Type:  [int, int]
+    # Range: [(0:Max-1),(1:Max-1)]
+    # The zero-based indices of the two neighboring waypoints closest to the agent's current position of (x, y).
+    # The distance is measured by the Euclidean distance from the center of the agent. The first element refers to the
+    # closest waypoint behind the agent and the second element refers the closest waypoint in front of the agent.
+    return params['closest_waypoints']
+
+def _getHeading(params):
+    # heading
+    # Type: float
+    # Range: -180:+180
+    # Heading direction, in degrees, of the agent with respect to the x-axis of the coordinate system.
+    return params['heading']
+
 def reward_function(params):
     '''
-    Example of penalize steering, which helps mitigate zig-zag behaviors
+    Example of rewarding the agent to follow center line
     '''
-    
     # Read input parameters
-    distance_from_center = params['distance_from_center']
-    track_width = params['track_width']
-    steering = abs(params['steering_angle']) # Only need the absolute steering angle
+    waypoints = params['waypoints']
+    speed = params['speed']
+    closest_waypoints = _getClosestWaypoints(params)
+    heading = _getHeading(params)
 
-    # Calculate 3 marks that are farther and father away from the center line
-    marker_1 = 0.1 * track_width
-    marker_2 = 0.25 * track_width
-    marker_3 = 0.5 * track_width
-
-    # Give higher reward if the car is closer to center line and vice versa
-    if distance_from_center <= marker_1:
-        reward = 1
-    elif distance_from_center <= marker_2:
-        reward = 0.5
-    elif distance_from_center <= marker_3:
-        reward = 0.1
-    else:
-        reward = 1e-3  # likely crashed/ close to off track
-
-    # Steering penality threshold, change the number based on your action space setting
-    ABS_STEERING_THRESHOLD = 15
-
-    # Penalize reward if the car is steering too much
-    if steering > ABS_STEERING_THRESHOLD:
-        reward *= 0.8
-
+    #Calculate direction 
+    track_direction = getTrackDirection(waypoints, closest_waypoints)
+    direction_diff = getDirectionDiff(track_direction, heading) 
+    
+    reward = 21
+    reward = curveSpeedPenalty(direction_diff, speed, reward)
+    
     return float(reward)
