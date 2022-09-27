@@ -30,12 +30,12 @@ def getDirectionDiff(track_direction, heading):
 
 def curveSpeedPenalty(direction_diff, speed, reward):  #combinar con lo de dav id, chequear reinforment positivo
   #if the car isnt going staight, and the speed is 
-    threshold = 15
+    threshold = 5
     for space in action_space:
         if direction_diff == space["steering_angle"] and speed == space['speed']:
             reward += 20
         elif direction_diff - threshold > space["steering_angle"] >  direction_diff + threshold: 
-            threshold = 0.25
+            threshold = 0.1
             if space['speed'] - threshold > speed > space['speed'] + threshold:
                 reward += 10
             else:
