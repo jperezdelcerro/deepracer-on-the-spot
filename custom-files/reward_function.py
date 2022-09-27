@@ -2,12 +2,19 @@ import numpy as np
 import math
 
 action_space = [
-        {"steering_angle": -30, "speed": 1.2},
-        {"steering_angle": -15, "speed": 2.0},
-        {"steering_angle": 0,   "speed": 2.0},
-        {"steering_angle": 5,   "speed": 2.0},
-        {"steering_angle": 15,  "speed": 1.2},
-        {"steering_angle": 30,  "speed": 1.2}
+        {"steering_angle": -30, "speed": 1},
+        {"steering_angle": -25, "speed": 1.1},
+        {"steering_angle": -20, "speed": 1.2},
+        {"steering_angle": -15, "speed": 1.3},
+        {"steering_angle": -10, "speed": 1.4},        
+        {"steering_angle": -5, "speed": 1.5},
+        {"steering_angle": 0, "speed": 2.0},
+        {"steering_angle": 5,  "speed": 1.5},
+        {"steering_angle": 10,   "speed": 1.4},
+        {"steering_angle": 15,   "speed": 1.3},
+        {"steering_angle": 20,  "speed": 1.2},
+        {"steering_angle": 25,  "speed": 1.1},
+        {"steering_angle": 30,  "speed": 1}
 ]
 
 def getTrackDirection(waypoints, closest_waypoints):
@@ -35,7 +42,7 @@ def curveSpeedPenalty(direction_diff, speed, reward):  #combinar con lo de dav i
         if direction_diff == space["steering_angle"] and speed == space['speed']:
             reward += 20
         elif direction_diff - threshold > space["steering_angle"] >  direction_diff + threshold: 
-            threshold = 0.1
+            threshold = 0.25
             if space['speed'] - threshold > speed > space['speed'] + threshold:
                 reward += 10
             else:
