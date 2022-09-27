@@ -2,19 +2,19 @@ import numpy as np
 import math
 
 action_space = [
-        {"steering_angle": -30, "speed": 1},
-        {"steering_angle": -25, "speed": 1.1},
-        {"steering_angle": -20, "speed": 1.2},
-        {"steering_angle": -15, "speed": 1.3},
-        {"steering_angle": -10, "speed": 1.4},        
-        {"steering_angle": -5, "speed": 1.5},
-        {"steering_angle": 0, "speed": 2.0},
-        {"steering_angle": 5,  "speed": 1.5},
-        {"steering_angle": 10,   "speed": 1.4},
-        {"steering_angle": 15,   "speed": 1.3},
-        {"steering_angle": 20,  "speed": 1.2},
-        {"steering_angle": 25,  "speed": 1.1},
-        {"steering_angle": 30,  "speed": 1}
+        {"steering_angle": -30, "speed": 1.2},
+        {"steering_angle": -25, "speed": 1.2},
+        {"steering_angle": -20, "speed": 1.3},
+        {"steering_angle": -15, "speed": 1.5},
+        {"steering_angle": -10, "speed": 2},        
+        {"steering_angle": -5, "speed": 2.5},
+        {"steering_angle": 0, "speed": 3.0},
+        {"steering_angle": 5,  "speed": 2.5},
+        {"steering_angle": 10,   "speed": 2},
+        {"steering_angle": 15,   "speed": 1.5},
+        {"steering_angle": 20,  "speed": 1.3},
+        {"steering_angle": 25,  "speed": 1.2},
+        {"steering_angle": 30,  "speed": 1.1}
 ]
 
 def getTrackDirection(waypoints, closest_waypoints):
