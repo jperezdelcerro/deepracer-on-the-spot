@@ -2,7 +2,7 @@ import numpy as np
 import math
 
 action_space = [
-        {"steering_angle": -30, "speed": 1.2},
+        {"steering_angle": -30, "speed": 1.1},
         {"steering_angle": -25, "speed": 1.2},
         {"steering_angle": -20, "speed": 1.3},
         {"steering_angle": -15, "speed": 1.5},
@@ -36,7 +36,7 @@ def getDirectionDiff(track_direction, heading):
     return direction_diff
 
 def getSpeedThereshold(speed):
-    return 0.5 if 1.5 > speed > 3 else 0.1
+    return 0.5 if 1.5 >= speed >= 3 else 0.1
 
 def curveSpeedPenalty(direction_diff, speed, reward):  #combinar con lo de dav id, chequear reinforment positivo
   #if the car isnt going staight, and the speed is 
@@ -44,9 +44,9 @@ def curveSpeedPenalty(direction_diff, speed, reward):  #combinar con lo de dav i
     for space in action_space:
         if direction_diff == space["steering_angle"] and speed == space['speed']:
             reward += 20
-        elif direction_diff - threshold > space["steering_angle"] >  direction_diff + threshold: 
+        elif direction_diff - threshold >= space["steering_angle"] >=  direction_diff + threshold: 
             threshold = getSpeedThereshold(space['speed'])
-            if space['speed'] - threshold > speed > space['speed'] + threshold:
+            if space['speed'] - threshold >= speed >= space['speed'] + threshold:
                 reward += 10
             else:
                 reward -= 10
