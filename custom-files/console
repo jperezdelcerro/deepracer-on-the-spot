@@ -1,0 +1,35 @@
+git clone https://github.com/Esalaine/deepracer-templates
+
+cd deepracer-templates -> para correr ./ hay que estar aca 
+
+./create-base-resources.sh tranqui120-jose-base 190.18.77.3
+
+----------------------------------------------------------------------------------
+
+para updatear files
+- > actions, upload. Se tiene que llamar reward_function.py,run.env, igual que siempre
+despues hay qe copiarlo a la carpeta de custom files
+en consola 
+si el archivo ya existe en home, 
+rm reward_funcition.py
+rm run.env
+mv *.py  ~/deepracer-templates
+mv *.env  ~/deepracer-templates
+mv *.hjson  ~/deepracer-templates
+
+mv /home/cloudshell-user/reward_function1.py /home/cloudshell-user/deepracer-templates/custom-files/.
+mv /home/cloudshell-user/run.env /home/cloudshell-user/deepracer-templates/custom-files/.
+mv /home/cloudshell-user/model_metadata.json /home/cloudshell-user/deepracer-templates/custom-files/.
+mv /home/cloudshell-user/system.env /home/cloudshell-user/deepracer-templates/custom-files/.
+mv /home/cloudshell-user/hyperparameters.json /home/cloudshell-user/deepracer-templates/custom-files/.
+
+nuevo training
+./create-standard-instance.sh tranqui120-jose-base jose-training-02 60 -> esto arranca el training
+ ./create-standard-instance.sh tranqui120-jose-base jose-prueba-06 200
+quizas te pida cambiar el nombre del modelo del auto
+
+http://ec2ip.52.23.207.240:8080
+
+git clone https://github.com/jperezdelcerro/deepracer-on-the-spot
+--------------
+https://ida.jpmorganchase.com/adfs/ls/idpinitiatedsignon.aspx?logintorp=ASB
