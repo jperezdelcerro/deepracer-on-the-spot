@@ -143,7 +143,7 @@ def reward_function(params):
     track_direction = getTrackDirection(waypoints, closest_waypoints)
     direction_diff = getDirectionDiff(track_direction, heading) 
     
-    reward = 21
+    reward = 1
     
 
 
@@ -163,7 +163,7 @@ def reward_function(params):
         else:
             reward+=5
     else:
-        reward -= 20
+        reward = 1e-03
 
 
     return float(reward)
