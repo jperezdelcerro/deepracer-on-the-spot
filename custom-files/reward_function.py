@@ -148,15 +148,20 @@ def reward_function(params):
 
 
     if closest_waypoints[1] in LEFT_LANE and is_left_of_center:
-        reward += 20
-        reward = curveSpeedPenalty(direction_diff, speed, reward)
+        if direction_diff > 0 and speed <= 1.7:
+            reward+=20
+        else:
+            reward+=5
     elif closest_waypoints[1] in RIGHT_LANE and not is_left_of_center:
-        reward += 20
-        reward = curveSpeedPenalty(direction_diff, speed, reward)
+        if direction_diff < 0 and speed <= 1.7:
+            reward+=20
+        else:
+            reward+=5
     elif closest_waypoints[1] in CENTER_LANE and center_variance < 0.4:
-        reward += 20
-        reward = curveSpeedPenalty(direction_diff, speed, reward)
-
+        if -5 >= direction_diff >= 5 and 2.5 >= speed >= 3:
+            reward+=25
+        else:
+            reward+=5
     else:
         reward -= 20
 
