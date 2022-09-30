@@ -5,11 +5,11 @@ action_space = [
         {"steering_angle": -25, "speed": 1.2},
         {"steering_angle": -20, "speed": 1.3},
         {"steering_angle": -15, "speed": 1.5},
-        {"steering_angle": -10, "speed": 2},        
-        {"steering_angle": -5, "speed": 2.5},
-        {"steering_angle": 0, "speed": 3.0},
-        {"steering_angle": 5,  "speed": 2.5},
-        {"steering_angle": 10,   "speed": 2},
+        {"steering_angle": -10, "speed": 2.5},        
+        {"steering_angle": -5, "speed": 3},
+        {"steering_angle": 0, "speed": 3.5},
+        {"steering_angle": 5,  "speed": 3},
+        {"steering_angle": 10,   "speed": 2.5},
         {"steering_angle": 15,   "speed": 1.5},
         {"steering_angle": 20,  "speed": 1.3},
         {"steering_angle": 25,  "speed": 1.2},
@@ -92,7 +92,12 @@ def getDirectionDiff(track_direction, heading):
     return direction_diff
 
 def getSpeedThereshold(speed):
-    return 0.5 if 1.5 >= speed >= 3 else 0.1
+    if 2.5 > speed >= 3:
+        return 0.5
+    elif 1.5 > speed >= 2.5:
+        return 1
+    else:
+        return 0.1
 
 def curveSpeedPenalty(direction_diff, speed, reward):  #combinar con lo de dav id, chequear reinforment positivo
   #if the car isnt going staight, and the speed is 
@@ -105,11 +110,9 @@ def curveSpeedPenalty(direction_diff, speed, reward):  #combinar con lo de dav i
             if space['speed'] - threshold >= speed >= space['speed'] + threshold:
                 reward += 10
             else:
-                reward -= 10
+                reward -= 15
             return reward
     return reward
-
-
 
 def _getClosestWaypoints(params):
     # closest_waypoints
@@ -143,9 +146,7 @@ def reward_function(params):
     track_direction = getTrackDirection(waypoints, closest_waypoints)
     direction_diff = getDirectionDiff(track_direction, heading) 
     
-    reward = 21
-    
-
+    reward = 1
 
     if closest_waypoints[1] in LEFT_LANE and is_left_of_center:
         reward += 20
@@ -158,7 +159,7 @@ def reward_function(params):
         reward = curveSpeedPenalty(direction_diff, speed, reward)
 
     else:
-        reward -= 20
+        reward = 1e0-3
 
 
     return float(reward)

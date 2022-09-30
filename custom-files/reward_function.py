@@ -145,8 +145,6 @@ def reward_function(params):
     
     reward = 1
     
-
-
     if closest_waypoints[1] in LEFT_LANE and is_left_of_center:
         if direction_diff > 0 and speed <= 1.7:
             reward+=20
