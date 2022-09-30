@@ -1,19 +1,19 @@
 import math
 
 action_space = [
-        {"steering_angle": -30, "speed": 1.1},
-        {"steering_angle": -25, "speed": 1.2},
-        {"steering_angle": -20, "speed": 1.3},
-        {"steering_angle": -15, "speed": 1.5},
+        {"steering_angle": -30, "speed": 1.3},
+        {"steering_angle": -25, "speed": 1.4},
+        {"steering_angle": -20, "speed": 1.5},
+        {"steering_angle": -15, "speed": 2},
         {"steering_angle": -10, "speed": 2.5},        
         {"steering_angle": -5, "speed": 3},
         {"steering_angle": 0, "speed": 3.5},
         {"steering_angle": 5,  "speed": 3},
         {"steering_angle": 10,   "speed": 2.5},
-        {"steering_angle": 15,   "speed": 1.5},
-        {"steering_angle": 20,  "speed": 1.3},
-        {"steering_angle": 25,  "speed": 1.2},
-        {"steering_angle": 30,  "speed": 1.1}
+        {"steering_angle": 15,   "speed": 2},
+        {"steering_angle": 20,  "speed": 1.5},
+        {"steering_angle": 25,  "speed": 1.4},
+        {"steering_angle": 30,  "speed": 1.3}
 ]
 
 LEFT_LANE = [14,15,16,17,18,19,20,21,22,23,24,25,26,27,
@@ -92,23 +92,20 @@ def getDirectionDiff(track_direction, heading):
     return direction_diff
 
 def getSpeedThereshold(speed):
-    if 2.5 > speed >= 3:
-        return 0.5
-    elif 1.5 > speed >= 2.5:
-        return 1
-    else:
-        return 0.1
+    return 0.5 if 1.5 > speed >= 3.5 else 0.1
 
 def curveSpeedPenalty(direction_diff, speed, reward):  #combinar con lo de dav id, chequear reinforment positivo
   #if the car isnt going staight, and the speed is 
     threshold = 5
+    angle = space["steering_angle"]
+    space_speed = space['speed']
     for space in action_space:
-        if direction_diff == space["steering_angle"] and speed == space['speed']:
+        if direction_diff == angle and speed == space_speed:
             reward += 20
-        elif direction_diff - threshold >= space["steering_angle"] >=  direction_diff + threshold: 
-            threshold = getSpeedThereshold(space['speed'])
-            if space['speed'] - threshold >= speed >= space['speed'] + threshold:
-                reward += 10
+        elif direction_diff - threshold >= angle >=  direction_diff + threshold: 
+            threshold = getSpeedThereshold(space_speed)
+            if space_speed - threshold >= speed >= space_speed + threshold:
+                reward += 15
             else:
                 reward -= 15
             return reward
