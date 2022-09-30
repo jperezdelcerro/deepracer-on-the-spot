@@ -1,3 +1,5 @@
+#####################        REWARD 3      #####################   
+
 def reward_function(params):
     center_variance = params["distance_from_center"] / params["track_width"]
 
@@ -67,20 +69,20 @@ def reward_function(params):
     waypoints = closest_waypoints[1]
     if waypoints in left_lane and is_left_of_center:
         reward += 10
-        if waypoints in fast and speed == 3.0:
+        if waypoints in fast and speed > 2:
             reward += 15
         else:
             reward -= 10
     elif waypoints in right_lane and not is_left_of_center:
         reward += 10
-        if waypoints in slow and speed < 1.5:
+        if waypoints in slow and speed > 2:
             reward += 15
         else:
             reward -= 10
     elif waypoints in center_lane and center_variance < 0.4:
         reward += 10
         if waypoints in middle or waypoints in middle1:
-            if speed == 2.0:
+            if speed >= 3:
                 reward += 15
             else:
                 reward -= 10

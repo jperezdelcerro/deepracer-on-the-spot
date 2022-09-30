@@ -1,3 +1,5 @@
+#####################        REWARD   1    #####################   
+
 import math
 
 action_space = [
