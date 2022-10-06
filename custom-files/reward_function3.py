@@ -1,14 +1,25 @@
-#####################        REWARD 3      #####################   
+
+from ctypes import pointer
+from turtle import speed
+
+        
+
+
+
+
+    
+        
+
+
 
 def reward_function(params):
-    center_variance = params["distance_from_center"] / params["track_width"]
+   
 
-    speed = params["speed"]
-    closest_waypoints = params["closest_waypoints"]
-    is_left_of_center = params["is_left_of_center"]
-
-
-    left_lane = [14,15,16,17,18,19,20,21,22,23,24,25,26,27,
+    left_lane = [
+                1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,
+                28,29,30,31,
+                  32,33,34,35,36,37, 
+                   44,45,46,
                 38,39,40,41,42,43,57,58,59,60,61,62,63,85,86,87,88,89,90,91,  
                 102,103,104,105,106,107,108,109,110,111,112,  
                 133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,  
@@ -38,9 +49,9 @@ def reward_function(params):
                   231,232,233,234,235,236,237,238,239
                                      ]
 
-    fast = [1,2,3,4,5,6,7,8,9,10,11,12,   
+    fast = [1,2,3,4,5,6,7,8,9,10,11,12,13,14, 
             27,28,29,30,31,32,33,34,35, 
-            46,47,48,49,
+            46,47,48,49,50,51,
             81,82,83,84,85,86,87,88,
             114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,
             155,156,157,158,  
@@ -50,45 +61,63 @@ def reward_function(params):
 
 
 
-    slow = [50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,  
+    slow = [52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,  
             70,71,72,73,74,75,76,77,78,79,80, 89,90,91,92,93,94,95,96,  
-            103,104,105,106,107,108,109,110,111,112,  191,192,193,194,195,196,197,198,199,200,201,202, 
+            102,103,104,105,106,107,108,109,110,111,112,  191,192,193,194,195,196,197,198,199,200,201,202, 
             227,228,229,230,231,232,233,234,235,236,237,238,239,240,241
                     ] 
 
-    middle = [13,14,15,16,17,18,19,20,21,22,24,25,26,
+    middle = [15,16,17,18,19,20,21,22,24,25,26,
               65,66,67,
-              97,98,99,100,101,102, 113,114 ]
+              97,98,99,100,101, 113,114 ]
 
 
     middle1 = [36,37,38,39,40,41,42,43,44,45,
                144,145,146,147,148,149,150,151,152,153,154,155,
                159,160,161,162,163,164, 185,186,187,188, 189,190,191]
 
+    center_variance = params["distance_from_center"] / params["track_width"]
 
-    waypoints = closest_waypoints[1]
-    if waypoints in left_lane and is_left_of_center:
+    speed = params["speed"]
+    closest_waypoints = params["closest_waypoints"]
+    is_left_of_center = params["is_left_of_center"]
+
+
+    reward = 21
+
+    if closest_waypoints in left_lane and is_left_of_center:
         reward += 10
-        if waypoints in fast and speed > 2:
-            reward += 15
-        else:
-            reward -= 10
-    elif waypoints in right_lane and not is_left_of_center:
+    elif closest_waypoints in right_lane and not is_left_of_center:
         reward += 10
-        if waypoints in slow and speed > 2:
-            reward += 15
-        else:
-            reward -= 10
-    elif waypoints in center_lane and center_variance < 0.4:
-        reward += 10
-        if waypoints in middle or waypoints in middle1:
-            if speed >= 3:
-                reward += 15
-            else:
-                reward -= 10
+    elif closest_waypoints in center_lane and center_variance < 0.35:
+        reward += 1 
     else:
-        reward = 1e-03
+        reward -= 10
 
+
+    if closest_waypoints in fast:
+        if speed == 4.0:
+            reward += 10
+        else:
+            reward -= 10
+
+    elif closest_waypoints in slow:
+        if speed < 1.9:
+            reward += 10
+        else:
+            reward -= 10
+
+    elif closest_waypoints in middle:
+        if speed == 2.8:
+            reward += 10
+        else:
+            reward -= 10
+
+    elif closest_waypoints in middle1:
+        if speed == 3.5:
+            reward += 10
+        else:
+            reward -= 10
 
 
 
