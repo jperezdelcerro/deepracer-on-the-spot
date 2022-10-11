@@ -304,14 +304,14 @@ def reward_function(params):
     angle = getDirectionDiff(track_direction, heading)
     
     reward = 1
-    expected_waypoint = way.get("waypoint")
+    expected_waypoint = way.get(str(closest_waypoints[1]))
+    if expected_waypoint:
+        if angle in expected_waypoint.get('angles') and speed in expected_waypoint.get('speed'):
+            reward +=25
+        elif angle in expected_waypoint.get('angles'):
+            reward +=10
+        elif speed in expected_waypoint.get('speed'):
+            reward +=10
     
-    if angle in expected_waypoint.get('angle') and speed in expected_waypoint.get('speed'):
-        reward +=25
-    elif angle in expected_waypoint.get('angle'):
-        reward +=10
-    elif speed in expected_waypoint.get('speed'):
-        reward +=10
-    
-    return reward 
+    return float(reward)
 
