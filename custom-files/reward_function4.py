@@ -1,6 +1,7 @@
 import math 
 
 
+
 CENTRO                  = [-2, 0, 2]
 CENTRO_LIBERAL          = [-5, 0, 5]
 CENTRO_DERECHA          = [0, 2]
