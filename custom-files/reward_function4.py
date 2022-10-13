@@ -3,15 +3,16 @@ import math
 
 
 
+#izq
+DE_2_A_2   	= [-2, 0, 2]
+DE_0_A_5   	= [0, -2, -5]
+DE_2_A_5   	= [-2, 0, 2, -5]
+DE_25_A_30 	= [-25, -30]
+DE_10_A_25 	= [-10, -15, -25]
 
-DE_2_A_2                  = [-2, 0, 2]
-DE_0_A_5   = [0, 2, 5]
-DE_2_A_5   = [-2, 0, 2, 5]
-DE_25_A_30 = [25, 30]
-DE_10_A_25 = [10, 15, 25]
-
-DE_15_A_25 = [-15, -25]
-DE_15_A_2 = [-15, -10, -2]
+#der
+DE_15_A_25 	= [15, 25]
+DE_15_A_2 	= [15, 10, 2]
 
 CENTRO_DERECHA          = [0, 2]
 CENTRO_LIBERAL          = [-5, 0, 5]
@@ -19,8 +20,7 @@ DERECHA                 = [0, 5, 10, 15]
 DERECHA_DOBLE           = [15, 25, 30]
 IZQUIERDA_DOBLE         = [-25, -15,-10]
 IZQUIERDA_SUPER         = [-25,-15]
-MASSA                   = [-10, -5, -2, 0, 2
-, 5, 10]
+MASSA                   = [-10, -5, -2, 0, 2, 5, 10]
 
 angle_to_speed = {
                     '-25' : [1.6,2],
@@ -100,36 +100,36 @@ way = {
     '52': {'angles':DE_2_A_2, 'speed': [2, 4]},
     '53': {'angles':DE_2_A_2, 'speed': [2, 4]},
 
-    '54': {'angles': [30], 'speed':  [1.6,2]},
-    '55': {'angles': [25], 'speed': [1.3,1.5,2]},
-    '56': {'angles': [25], 'speed': [1.3,1.5,2]},
+    '54': {'angles': [-30], 'speed':  [1.6,2]},
+    '55': {'angles': [-25], 'speed': [1.3,1.5,2]},
+    '56': {'angles': [-25], 'speed': [1.3,1.5,2]},
 
     '57': {'angles': DE_2_A_2, 'speed': [1.6, 2]},
     '58': {'angles': DE_2_A_2, 'speed': [1.6, 2]},
     '59': {'angles': DE_2_A_2,  'speed': [1.6, 2]},
 
-    '60': {'angles': [10], 'speed': [1.6, 2]},
-    '61': {'angles': [10], 'speed': [1.6, 2]},
-    '62': {'angles': [10], 'speed': [1.6, 2]},
-    '63': {'angles': [10], 'speed': [1.6, 2]},
+    '60': {'angles': [-10], 'speed': [1.6, 2]},
+    '61': {'angles': [-10], 'speed': [1.6, 2]},
+    '62': {'angles': [-10], 'speed': [1.6, 2]},
+    '63': {'angles': [-10], 'speed': [1.6, 2]},
 
-    '64': {'angles': [30], 'speed':  [1.6,2]},
-    '65': {'angles': [30], 'speed': [1.6,2]},
-    '66': {'angles': [30], 'speed': [1.6,2]},
+    '64': {'angles': [-30], 'speed':  [1.6,2]},
+    '65': {'angles': [-30], 'speed': [1.6,2]},
+    '66': {'angles': [-30], 'speed': [1.6,2]},
 
-    '67': {'angles': [-25], 'speed': [2]},
-    '68': {'angles': [-25], 'speed': [2]},
-    '69': {'angles': [-25], 'speed': [2]},
-    '70': {'angles': [-25], 'speed': [2]},
-    '71': {'angles': [-25], 'speed': [2]},
-    '72': {'angles': [-25], 'speed': [2]},
-    '73': {'angles': [-25], 'speed': [2]},
-    '74': {'angles': [-25], 'speed': [2]},
-    '75': {'angles': [-25], 'speed': [2]},
-    '76': {'angles': [-25], 'speed': [2]},
-    '77': {'angles': [-25], 'speed': [2]},
-    '78': {'angles': [-25], 'speed': [2]},
-    '79': {'angles': [-25], 'speed': [2]},
+    '67': {'angles': [25], 'speed': [2]},
+    '68': {'angles': [25], 'speed': [2]},
+    '69': {'angles': [25], 'speed': [2]},
+    '70': {'angles': [25], 'speed': [2]},
+    '71': {'angles': [25], 'speed': [2]},
+    '72': {'angles': [25], 'speed': [2]},
+    '73': {'angles': [25], 'speed': [2]},
+    '74': {'angles': [25], 'speed': [2]},
+    '75': {'angles': [25], 'speed': [2]},
+    '76': {'angles': [25], 'speed': [2]},
+    '77': {'angles': [25], 'speed': [2]},
+    '78': {'angles': [25], 'speed': [2]},
+    '79': {'angles': [25], 'speed': [2]},
     
     '80': {'angles': DE_2_A_2, 'speed': [2, 4]},
     '81': {'angles': DE_2_A_2, 'speed': [2, 4]},
@@ -161,14 +161,14 @@ way = {
     '105': {'angles': DE_25_A_30, 'speed': [3, 2, 1.6]},
     '106': {'angles': DE_25_A_30, 'speed': [3, 2, 1.6]},
 
-    '107': {'angles': [10], 'speed': [1.6,2]},
-    '108': {'angles': [10], 'speed': [1.6,2]},
-    '109': {'angles': [10], 'speed': [1.6,2]},
-    '110': {'angles': [10], 'speed': [1.6,2]},
-    '111': {'angles': [10], 'speed': [1.6,2]},
-    '112': {'angles': [10], 'speed': [1.6,2]},
-    '113': {'angles': [10], 'speed': [1.6,2]},
-    '114': {'angles': [10], 'speed': [1.6,2]},
+    '107': {'angles': [-10], 'speed': [-1.6,2]},
+    '108': {'angles': [-10], 'speed': [1.6,2]},
+    '109': {'angles': [-10], 'speed': [1.6,2]},
+    '110': {'angles': [-10], 'speed': [1.6,2]},
+    '111': {'angles': [-10], 'speed': [1.6,2]},
+    '112': {'angles': [-10], 'speed': [1.6,2]},
+    '113': {'angles': [-10], 'speed': [1.6,2]},
+    '114': {'angles': [-10], 'speed': [1.6,2]},
 
     '115': {'angles':DE_2_A_2, 'speed': [4]},
     '116': {'angles':DE_2_A_2, 'speed': [4]},
@@ -194,27 +194,27 @@ way = {
     '136': {'angles': DE_2_A_2, 'speed': [4]},
     '137': {'angles': DE_2_A_2, 'speed': [4]},
     
-    '138': {'angles': [10], 'speed': [4]},
-    '139': {'angles': [10], 'speed': [2, 4]},
-    '140': {'angles': [10], 'speed': [2, 4]},
-    '141': {'angles': [10], 'speed': [2, 4]},
-    '142': {'angles': [10], 'speed': [2, 4]},
-    '143': {'angles': [10], 'speed': [2, 4]},
-    '144': {'angles': [10], 'speed': [2, 4]},
-    '145': {'angles': [10], 'speed': [2, 4]},
-    '146': {'angles': [10], 'speed': [2, 4]},
-    '147': {'angles': [10], 'speed': [2, 4]},
-    '148': {'angles': [10], 'speed': [2, 4]},
-    '149': {'angles': [10], 'speed': [2, 4]},
-    '150': {'angles': [10], 'speed': [2, 4]},
-    '151': {'angles': [10], 'speed': [2, 4]},
-    '152': {'angles': [10], 'speed': [2, 4]},
-    '153': {'angles': [10], 'speed': [2, 4]},
-    '154': {'angles': [10], 'speed': [2, 4]},
-    '155': {'angles': [10], 'speed': [2, 4]},
-    '156': {'angles': [10], 'speed': [2, 4]},
-    '157': {'angles': [10], 'speed': [2, 4]},
-    '158': {'angles': [10], 'speed': [2, 4]},
+    '138': {'angles': [-10], 'speed': [4]},
+    '139': {'angles': [-10], 'speed': [2, 4]},
+    '140': {'angles': [-10], 'speed': [2, 4]},
+    '141': {'angles': [-10], 'speed': [2, 4]},
+    '142': {'angles': [-10], 'speed': [2, 4]},
+    '143': {'angles': [-10], 'speed': [2, 4]},
+    '144': {'angles': [-10], 'speed': [2, 4]},
+    '145': {'angles': [-10], 'speed': [2, 4]},
+    '146': {'angles': [-10], 'speed': [2, 4]},
+    '147': {'angles': [-10], 'speed': [2, 4]},
+    '148': {'angles': [-10], 'speed': [2, 4]},
+    '149': {'angles': [-10], 'speed': [2, 4]},
+    '150': {'angles': [-10], 'speed': [2, 4]},
+    '151': {'angles': [-10], 'speed': [2, 4]},
+    '152': {'angles': [-10], 'speed': [2, 4]},
+    '153': {'angles': [-10], 'speed': [2, 4]},
+    '154': {'angles': [-10], 'speed': [2, 4]},
+    '155': {'angles': [-10], 'speed': [2, 4]},
+    '156': {'angles': [-10], 'speed': [2, 4]},
+    '157': {'angles': [-10], 'speed': [2, 4]},
+    '158': {'angles': [-10], 'speed': [2, 4]},
 
     '159': {'angles': DE_2_A_2, 'speed': [4]},
     '160': {'angles': DE_2_A_2, 'speed': [4]},
@@ -360,15 +360,13 @@ def reward_function(params):
     track_direction = getTrackDirection(waypoints, closest_waypoints)
     angle = getDirectionDiff(track_direction, heading)
     
-    reward = 1
+    reward = 1e-03
     expected_waypoint = way.get(str(closest_waypoints[1]))
     if expected_waypoint:
         if angle in expected_waypoint.get('angles') and speed in expected_waypoint.get('speed'):
             reward +=25
-        elif angle in expected_waypoint.get('angles'):
-            reward +=10
-        elif speed in expected_waypoint.get('speed'):
-            reward +=10
+        elif angle in expected_waypoint.get('angles') or speed in expected_waypoint.get('speed'):
+            reward +=5
     
     return float(reward)
 
