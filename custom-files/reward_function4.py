@@ -1,372 +1,106 @@
-import math 
-
-
-
-
-#izq
-DE_2_A_2   	= [-2, 0, 2]
-DE_0_A_5   	= [0, -2, -5]
-DE_2_A_5   	= [-2, 0, 2, -5]
-DE_25_A_30 	= [-25, -30]
-DE_10_A_25 	= [-10, -15, -25]
-
-#der
-DE_15_A_25 	= [15, 25]
-DE_15_A_2 	= [15, 10, 2]
-
-CENTRO_DERECHA          = [0, 2]
-CENTRO_LIBERAL          = [-5, 0, 5]
-DERECHA                 = [0, 5, 10, 15]
-DERECHA_DOBLE           = [15, 25, 30]
-IZQUIERDA_DOBLE         = [-25, -15,-10]
-IZQUIERDA_SUPER         = [-25,-15]
-MASSA                   = [-10, -5, -2, 0, 2, 5, 10]
-
-angle_to_speed = {
-                    '-25' : [1.6,2],
-                    '-15' : [1.6],
-                    '-10' : [2],
-                    '-2' : [4],
-                    '0' : [4, 2],
-                    '2' : [4, 2],
-                    '5' : [2, 3, 4],
-                    '10' : [2, 4, 1.6],
-                    '15' : [3.5, 1.6],
-                    '25' : [1.6,],
-                    '30' : [1.6,2],
-                    }
-
-way = {
-    '0': {'angles':  DE_2_A_2, 'speed': [4]},
-    '1': {'angles': DE_2_A_2, 'speed': [4]}, 
-    '2': {'angles': DE_2_A_2, 'speed': [4]},
-    '3': {'angles': DE_2_A_2, 'speed': [4]},
-    '4': {'angles': DE_2_A_2, 'speed': [4]},
-    '5': {'angles': DE_2_A_2, 'speed': [4]},
-    '6': {'angles': DE_2_A_2, 'speed': [4]},
-    '7': {'angles': DE_2_A_2, 'speed': [4]},
-    '8': {'angles': DE_2_A_2, 'speed': [4]},
-    '9': {'angles': DE_2_A_2, 'speed': [4]},
-    '10': {'angles': DE_2_A_2, 'speed': [4]},
-    '11': {'angles': DE_2_A_2, 'speed': [4]},
-    '12': {'angles': DE_2_A_2, 'speed': [4]},
-    '13': {'angles': DE_2_A_2, 'speed': [4]},
-    '14': {'angles': DE_2_A_2, 'speed': [4]},
-
-    '15': {'angles': DE_0_A_5, 'speed': [3, 2, 1.6]},
-    '16': {'angles': DE_0_A_5, 'speed': [3, 2, 1.6]},
-    '17': {'angles': DE_0_A_5, 'speed': [3, 2, 1.6]},
-
-    '18': {'angles': DE_25_A_30, 'speed': [3, 2, 1.6]},
-    '19': {'angles': DE_25_A_30, 'speed': [3, 2, 1.6]},
-    '20': {'angles': DE_25_A_30, 'speed': [3, 2, 1.6]},
-    '21': {'angles': DE_25_A_30, 'speed': [3, 2, 1.6]},
-    '22': {'angles': DE_25_A_30, 'speed': [3, 2, 1.6]},
-
-    '23': {'angles': DE_2_A_2, 'speed': [2, 4]},
-    '24': {'angles': DE_2_A_2, 'speed': [2, 4]},
-    '25': {'angles': DE_2_A_2, 'speed': [2, 4]},
-    '26': {'angles': DE_2_A_2, 'speed': [2, 4]},
-
-    '27': {'angles': DE_25_A_30, 'speed': [3, 2, 1.6]},
-    '28': {'angles': DE_25_A_30, 'speed': [3, 2, 1.6]},
-    '29': {'angles': DE_25_A_30, 'speed': [3, 2, 1.6]},
-
-    '30': {'angles': DE_2_A_2, 'speed': [3, 2, 1.6]},
-    '31': {'angles': DE_2_A_2, 'speed': [3, 2, 1.6]},
-    '32': {'angles': DE_2_A_2, 'speed': [3, 2, 1.6]},
-
-    '33': {'angles': DE_2_A_5, 'speed': [3, 2, 4]},
-    '34': {'angles': DE_2_A_5, 'speed': [3, 2, 4]},
-    '35': {'angles': DE_2_A_5, 'speed': [3, 2, 4]},
-    '36': {'angles': DE_2_A_5, 'speed': [3, 2, 4]},
-    '37': {'angles': DE_2_A_5, 'speed': [3, 2, 4]},
-    '38': {'angles': DE_2_A_5, 'speed': [3, 2, 4]},
-    '39': {'angles': DE_2_A_5, 'speed': [3, 2, 4]},
-    '40': {'angles': DE_2_A_5, 'speed': [3, 2, 4]},
-    '41': {'angles': DE_2_A_5, 'speed': [3, 2, 4]},
-    '42': {'angles': DE_2_A_5, 'speed': [3, 2, 4]},
-
-    '43': {'angles': DE_10_A_25, 'speed': [2, 4, 1.6, 3.5]},
-    '44': {'angles': DE_10_A_25, 'speed': [2, 4, 1.6, 3.5]},
-    '45': {'angles': DE_10_A_25, 'speed': [2, 4, 1.6, 3.5]},
-    '46': {'angles': DE_10_A_25, 'speed': [2, 4, 1.6, 3.5]},
-    '47': {'angles': DE_10_A_25, 'speed': [2, 4, 1.6, 3.5]},
-    '48': {'angles': DE_10_A_25, 'speed': [2, 4, 1.6, 3.5]},
-    
-    '49': {'angles':DE_2_A_2, 'speed': [2, 4]},
-    '50': {'angles':DE_2_A_2, 'speed': [2, 4]},
-    '51': {'angles':DE_2_A_2, 'speed': [2, 4]},
-    '52': {'angles':DE_2_A_2, 'speed': [2, 4]},
-    '53': {'angles':DE_2_A_2, 'speed': [2, 4]},
-
-    '54': {'angles': [-30], 'speed':  [1.6,2]},
-    '55': {'angles': [-25], 'speed': [1.3,1.5,2]},
-    '56': {'angles': [-25], 'speed': [1.3,1.5,2]},
-
-    '57': {'angles': DE_2_A_2, 'speed': [1.6, 2]},
-    '58': {'angles': DE_2_A_2, 'speed': [1.6, 2]},
-    '59': {'angles': DE_2_A_2,  'speed': [1.6, 2]},
-
-    '60': {'angles': [-10], 'speed': [1.6, 2]},
-    '61': {'angles': [-10], 'speed': [1.6, 2]},
-    '62': {'angles': [-10], 'speed': [1.6, 2]},
-    '63': {'angles': [-10], 'speed': [1.6, 2]},
-
-    '64': {'angles': [-30], 'speed':  [1.6,2]},
-    '65': {'angles': [-30], 'speed': [1.6,2]},
-    '66': {'angles': [-30], 'speed': [1.6,2]},
-
-    '67': {'angles': [25], 'speed': [2]},
-    '68': {'angles': [25], 'speed': [2]},
-    '69': {'angles': [25], 'speed': [2]},
-    '70': {'angles': [25], 'speed': [2]},
-    '71': {'angles': [25], 'speed': [2]},
-    '72': {'angles': [25], 'speed': [2]},
-    '73': {'angles': [25], 'speed': [2]},
-    '74': {'angles': [25], 'speed': [2]},
-    '75': {'angles': [25], 'speed': [2]},
-    '76': {'angles': [25], 'speed': [2]},
-    '77': {'angles': [25], 'speed': [2]},
-    '78': {'angles': [25], 'speed': [2]},
-    '79': {'angles': [25], 'speed': [2]},
-    
-    '80': {'angles': DE_2_A_2, 'speed': [2, 4]},
-    '81': {'angles': DE_2_A_2, 'speed': [2, 4]},
-    '82': {'angles': DE_2_A_2, 'speed': [2, 4]},
-    '83': {'angles':DE_2_A_2, 'speed': [2, 4]},
-    '84': {'angles':DE_2_A_2, 'speed': [2, 4]},
-    '85': {'angles':DE_2_A_2, 'speed': [2, 4]},
-    '86': {'angles':DE_2_A_2, 'speed': [2, 4]},
-    '87': {'angles':DE_2_A_2, 'speed': [2, 4]},
-    '88': {'angles':DE_2_A_2, 'speed': [2, 4]},
-    '89': {'angles':DE_2_A_2, 'speed': [2, 4]},
-    '90': {'angles':DE_2_A_2, 'speed': [2, 4]},
-    '91': {'angles': DE_2_A_2, 'speed': [2, 4]},
-    '92': {'angles': DE_2_A_2, 'speed': [2, 4]},
-    '93': {'angles': DE_2_A_2, 'speed': [2, 4]},
-    '94': {'angles': DE_2_A_2, 'speed': [2, 4]},
-
-    '95': {'angles': DE_15_A_25, 'speed': [2]},
-    '96': {'angles': DE_15_A_25, 'speed': [2]},
-    '97': {'angles': DE_15_A_25, 'speed': [2]},
-    '98': {'angles': DE_15_A_25, 'speed': [2]},
-    '99': {'angles': DE_15_A_25, 'speed': [2]},
-    '100': {'angles': DE_15_A_25, 'speed': [2]},
-    '101': {'angles': DE_15_A_25, 'speed': [2]},
-    '102': {'angles': DE_15_A_25, 'speed': [2]},
-
-    '103': {'angles': DE_25_A_30, 'speed': [3, 2, 1.6]},
-    '104': {'angles': DE_25_A_30, 'speed': [3, 2, 1.6]},
-    '105': {'angles': DE_25_A_30, 'speed': [3, 2, 1.6]},
-    '106': {'angles': DE_25_A_30, 'speed': [3, 2, 1.6]},
-
-    '107': {'angles': [-10], 'speed': [-1.6,2]},
-    '108': {'angles': [-10], 'speed': [1.6,2]},
-    '109': {'angles': [-10], 'speed': [1.6,2]},
-    '110': {'angles': [-10], 'speed': [1.6,2]},
-    '111': {'angles': [-10], 'speed': [1.6,2]},
-    '112': {'angles': [-10], 'speed': [1.6,2]},
-    '113': {'angles': [-10], 'speed': [1.6,2]},
-    '114': {'angles': [-10], 'speed': [1.6,2]},
-
-    '115': {'angles':DE_2_A_2, 'speed': [4]},
-    '116': {'angles':DE_2_A_2, 'speed': [4]},
-    '117': {'angles':DE_2_A_2, 'speed': [4]},
-    '118': {'angles':DE_2_A_2, 'speed': [4]},
-    '119': {'angles':DE_2_A_2, 'speed': [4]},
-    '120': {'angles':DE_2_A_2, 'speed': [4]},
-    '121': {'angles':DE_2_A_2, 'speed': [4]},
-    '122': {'angles':DE_2_A_2, 'speed': [4]},
-    '123': {'angles':DE_2_A_2, 'speed': [4]},
-    '124': {'angles':DE_2_A_2, 'speed': [4]},
-    '125': {'angles':DE_2_A_2, 'speed': [4]},
-    '126': {'angles':DE_2_A_2, 'speed': [4]},
-    '127': {'angles':DE_2_A_2, 'speed': [4]},
-    '128': {'angles':DE_2_A_2, 'speed': [4]},
-    '129': {'angles':DE_2_A_2, 'speed': [4]},
-    '130': {'angles':DE_2_A_2, 'speed': [4]},
-    '131': {'angles':DE_2_A_2, 'speed': [4]},
-    '132': {'angles':DE_2_A_2, 'speed': [4]},
-    '133': {'angles': DE_2_A_2, 'speed': [4]},
-    '134': {'angles': DE_2_A_2, 'speed': [4]},
-    '135': {'angles': DE_2_A_2, 'speed': [4]},
-    '136': {'angles': DE_2_A_2, 'speed': [4]},
-    '137': {'angles': DE_2_A_2, 'speed': [4]},
-    
-    '138': {'angles': [-10], 'speed': [4]},
-    '139': {'angles': [-10], 'speed': [2, 4]},
-    '140': {'angles': [-10], 'speed': [2, 4]},
-    '141': {'angles': [-10], 'speed': [2, 4]},
-    '142': {'angles': [-10], 'speed': [2, 4]},
-    '143': {'angles': [-10], 'speed': [2, 4]},
-    '144': {'angles': [-10], 'speed': [2, 4]},
-    '145': {'angles': [-10], 'speed': [2, 4]},
-    '146': {'angles': [-10], 'speed': [2, 4]},
-    '147': {'angles': [-10], 'speed': [2, 4]},
-    '148': {'angles': [-10], 'speed': [2, 4]},
-    '149': {'angles': [-10], 'speed': [2, 4]},
-    '150': {'angles': [-10], 'speed': [2, 4]},
-    '151': {'angles': [-10], 'speed': [2, 4]},
-    '152': {'angles': [-10], 'speed': [2, 4]},
-    '153': {'angles': [-10], 'speed': [2, 4]},
-    '154': {'angles': [-10], 'speed': [2, 4]},
-    '155': {'angles': [-10], 'speed': [2, 4]},
-    '156': {'angles': [-10], 'speed': [2, 4]},
-    '157': {'angles': [-10], 'speed': [2, 4]},
-    '158': {'angles': [-10], 'speed': [2, 4]},
-
-    '159': {'angles': DE_2_A_2, 'speed': [4]},
-    '160': {'angles': DE_2_A_2, 'speed': [4]},
-    '161': {'angles': DE_2_A_2, 'speed': [4]},
-    '162': {'angles': DE_2_A_2, 'speed': [4]},
-    '163': {'angles':DE_2_A_2, 'speed': [4]},
-    '164': {'angles':DE_2_A_2, 'speed': [4]},
-    '165': {'angles':DE_2_A_2, 'speed': [4]},
-    '166': {'angles':DE_2_A_2, 'speed': [4]},
-    '167': {'angles':DE_2_A_2, 'speed': [4]},
-    '168': {'angles':DE_2_A_2, 'speed': [4]},
-    '169': {'angles':DE_2_A_2, 'speed': [4]},
-    '170': {'angles':DE_2_A_2, 'speed': [4]},
-    '171': {'angles':DE_2_A_2, 'speed': [4]},
-    '172': {'angles':DE_2_A_2, 'speed': [4]},
-    '173': {'angles':DE_2_A_2, 'speed': [4]},
-    '174': {'angles':DE_2_A_2, 'speed': [4]},
-    '175': {'angles':DE_2_A_2, 'speed': [4]},
-    '176': {'angles':DE_2_A_2, 'speed': [4]},
-    '177': {'angles':DE_2_A_2, 'speed': [4]},
-    '178': {'angles':DE_2_A_2, 'speed': [4]},
-    '179': {'angles':DE_2_A_2, 'speed': [4]},
-
-    '180': {'angles':DE_2_A_2, 'speed': [4]},
-    '181': {'angles':DE_2_A_2, 'speed': [4]},
-    '182': {'angles':DE_2_A_2, 'speed': [4]},
-    '183': {'angles':DE_2_A_2, 'speed': [4]},
-    '184': {'angles':DE_2_A_2, 'speed': [4]},
-    '185': {'angles':DE_2_A_2, 'speed': [4]},
-    '186': {'angles':DE_2_A_2, 'speed': [4]},
-    '187': {'angles':DE_2_A_2, 'speed': [4]},
-    '188': {'angles':DE_2_A_2, 'speed': [4]},
-    '189': {'angles': DERECHA_DOBLE, 'speed': [1.3,1.6,2]},
-    '190':{'angles': DERECHA_DOBLE, 'speed': [1.3,1.6,2]},
-    '191':{'angles': DERECHA_DOBLE, 'speed': [1.3,1.6,2]},
-    '192':{'angles': DERECHA_DOBLE, 'speed': [1.3,1.6,2]},
-    '193':{'angles': DERECHA_DOBLE, 'speed': [1.3,1.6,2]},
-    '194':{'angles': DERECHA_DOBLE, 'speed': [1.3,1.6,2]},
-    '195':{'angles': DERECHA_DOBLE, 'speed': [1.3,1.6,2]},
-    '196':{'angles': DERECHA_DOBLE, 'speed': [1.3,1.6,2]},
-    '197':{'angles': DERECHA_DOBLE, 'speed': [1.3,1.6,2]},
-    '198':{'angles': DERECHA_DOBLE, 'speed': [1.3,1.6,2]},
-    '199':{'angles': DERECHA_DOBLE, 'speed': [1.3,1.6,2]},
-    '200':{'angles': DERECHA_DOBLE, 'speed': [1.3,1.6,2]},
-    '201':{'angles': DERECHA_DOBLE, 'speed': [1.3,1.6,2]},
-    '202':{'angles': DERECHA_DOBLE, 'speed': [1.3,1.6,2]},
-    '203':{'angles': DERECHA_DOBLE, 'speed': [1.3,1.6,2]},
-    '204':{'angles': DERECHA_DOBLE, 'speed': [1.3,1.6,2]},
-    '205':{'angles':DE_2_A_2, 'speed': [3.5,4]},
-    '206':{'angles':DE_2_A_2, 'speed': [3.5,4]},
-    '207': {'angles':DE_2_A_2, 'speed': [3.5,4]},
-    '208': {'angles':DE_2_A_2, 'speed': [3.5,4]},
-    '209': {'angles':DE_2_A_2, 'speed': [3.5,4]},
-    '210': {'angles':DE_2_A_2, 'speed': [3.5,4]},
-    '211': {'angles':DE_2_A_2, 'speed': [3.5,4]},
-    '212': {'angles':DE_2_A_2, 'speed': [3.5,4]},
-    '213': {'angles':DE_2_A_2, 'speed': [3.5,4]},
-    '214': {'angles':DE_2_A_2, 'speed': [3.5,4]},
-    '215': {'angles':DE_2_A_2, 'speed': [3.5,4]},
-    '216': {'angles':DE_2_A_2, 'speed': [3.5,4]},
-    '217': {'angles':DE_2_A_2, 'speed': [3.5,4]},
-    '218': {'angles':DE_2_A_2, 'speed': [3.5,4]},
-    '219': {'angles':DE_2_A_2, 'speed': [3.5,4]},
-    '220': {'angles':DE_2_A_2, 'speed': [3.5,4]},
-    '221': {'angles':DE_2_A_2, 'speed': [3.5,4]},
-    '222': {'angles':DE_2_A_2, 'speed': [3.5,4]},
-    '223': {'angles':DE_2_A_2, 'speed': [3.5,4]},
-    '224': {'angles':DE_2_A_2, 'speed': [3.5,4]},
-    '225': {'angles':DE_2_A_2, 'speed': [3.5,4]},
-    '226': {'angles':DE_2_A_2, 'speed': [3.5,4]},
-    '227': {'angles': IZQUIERDA_SUPER, 'speed': [1.6,2]},
-    '228': {'angles': IZQUIERDA_SUPER, 'speed': [1.6,2]},
-    '229': {'angles': IZQUIERDA_SUPER, 'speed': [1.6,2]},
-    '230': {'angles': IZQUIERDA_SUPER, 'speed': [1.6,2]},
-    '231': {'angles': IZQUIERDA_SUPER, 'speed': [1.6,2]},
-    '232': {'angles': IZQUIERDA_SUPER, 'speed': [1.6,2]},
-    '233': {'angles': IZQUIERDA_SUPER, 'speed': [1.6,2]},
-    '234': {'angles': IZQUIERDA_SUPER, 'speed': [1.6,2]},
-    '235': {'angles': IZQUIERDA_SUPER, 'speed': [1.6,2]},
-    '236': {'angles': IZQUIERDA_SUPER, 'speed': [1.6,2]},
-    '237': {'angles': IZQUIERDA_SUPER, 'speed': [1.6,2]},
-    '238': {'angles': IZQUIERDA_SUPER, 'speed': [1.6,2]},
-    '239': {'angles': IZQUIERDA_SUPER, 'speed': [1.6,2]},
-    '240': {'angles': IZQUIERDA_SUPER, 'speed': [1.6,2]},
-    '241': {'angles': IZQUIERDA_SUPER, 'speed': [1.6,2]},
-    '242': {'angles': IZQUIERDA_SUPER, 'speed': [1.6,2]},
-    '243': {'angles': IZQUIERDA_SUPER, 'speed': [1.6,2]},
-    '244': {'angles': IZQUIERDA_SUPER, 'speed': [1.6,2]},
-    '245': {'angles':DE_2_A_2, 'speed': [3.5,4]},
-    '246': {'angles':DE_2_A_2, 'speed': [3.5,4]},
-    '247': {'angles':DE_2_A_2, 'speed': [3.5,4]},
-    '248': {'angles':DE_2_A_2, 'speed': [3.5,4]},
-    '249': {'angles':DE_2_A_2, 'speed': [3.5,4]},
-    '250': {'angles':DE_2_A_2, 'speed': [3.5,4]},
-    '251': {'angles':DE_2_A_2, 'speed': [3.5,4]},
-    '252': {'angles':DE_2_A_2, 'speed': [3.5,4]},
-    '253': {'angles':DE_2_A_2, 'speed': [3.5,4]},
-    '254': {'angles':DE_2_A_2, 'speed': [3.5,4]},
-}
-
-def _getClosestWaypoints(params):
-    # closest_waypoints
-    # Type:  [int, int]
-    # Range: [(0:Max-1),(1:Max-1)]
-    # The zero-based indices of the two neighboring waypoints closest to the agent's current position of (x, y).
-    # The distance is measured by the Euclidean distance from the center of the agent. The first element refers to the
-    # closest waypoint behind the agent and the second element refers the closest waypoint in front of the agent.
-    return params['closest_waypoints']
-
-def _getHeading(params):
-    # heading
-    # Type: float
-    # Range: -180:+180
-    # Heading direction, in degrees, of the agent with respect to the x-axis of the coordinate system.
-    return params['heading']
-
-def getTrackDirection(waypoints, closest_waypoints):
-    # Calculate the direction of the center line based on the closest waypoints
-    next_point = waypoints[closest_waypoints[1]]
-    prev_point = waypoints[closest_waypoints[0]]
-    
-    # Calculate the direction in radius, arctan2(dy, dx), the result is (-pi, pi) in radians
-    track_direction = math.atan2(next_point[1] - prev_point[1], next_point[0] - prev_point[0])
-    # Convert to degree
-    return math.degrees(track_direction)
-
-def getDirectionDiff(track_direction, heading):
-    # Calculate the difference between the track direction and the heading direction of the car
-    direction_diff = abs(track_direction - heading)
-    if direction_diff > 180:
-        direction_diff = 360 - direction_diff
-        
-    return direction_diff
-
 def reward_function(params):
-    # Read input parameters
-    waypoints = params['waypoints']
-    speed = params['speed']
-    closest_waypoints = _getClosestWaypoints(params)
-    heading = _getHeading(params)
+    center_variance = params["distance_from_center"] / params["track_width"]
 
-    #Calculate direction 
-    track_direction = getTrackDirection(waypoints, closest_waypoints)
-    angle = getDirectionDiff(track_direction, heading)
-    
-    reward = 1e-03
-    expected_waypoint = way.get(str(closest_waypoints[1]))
-    if expected_waypoint:
-        if angle in expected_waypoint.get('angles') and speed in expected_waypoint.get('speed'):
-            reward +=25
-        elif angle in expected_waypoint.get('angles') or speed in expected_waypoint.get('speed'):
-            reward +=5
-    
+    speed = params["speed"]
+    closest_waypoints = params["closest_waypoints"]
+    is_left_of_center = params["is_left_of_center"]
+
+
+    left_lane = [14,15,16,17,18,19,20,21,22,23,24,25,26,27,
+                38,39,40,41,42,43,57,58,59,60,61,62,63,85,86,87,88,89,90,91,  
+                102,103,104,105,106,107,108,109,110,111,112,  
+                133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,  
+                159,160,161,162,163,164, 194,195,196,197,198,199,200,201,   
+                225,226,227,228,243,244,245,246,247,248,249,250 ]
+
+    center_lane = [1,2,3,4,5,6,7,8,9,10,11,12,13,28,29,30,31,
+                  32,33,34,35,36,37, 
+                   44,45,46,
+                   47,48,49,50,51,
+                   52,53,54, 55,56,64,65,66,67,68,69,70,79,80,81, 82,83,84,  92,93,   
+                   101, 112,113,114,  
+                   114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129, 
+                   130,131,132, 144,145,146,147,148,149, 
+                   150,151,152,153,154,  157,158,  165,166,167,168, 
+                   176,177,178,179,180,181,182,183,184,185,186, 
+                   191,192,193, 202,203, 210,211,212,213,214,215,216,218,219,220,221,222,223,224,225,226,227,228,229,230, 
+                   240,241,242,  250,251,252,253,254]
+
+
+    right_lane = [
+                  71,72,73,74,75,76,77,78,
+                  93,94,95,96,97,
+                  98,99,100,  
+                  154,155,156,   168,169,170,171,172,173,174,175,  
+                  187,188,189,190,  204,205,206,207,208,209,210,211,212, 
+                  231,232,233,234,235,236,237,238,239
+                                     ]
+
+    fast = [1,2,3,4,5,6,7,8,9,10,11,12,13,14, 
+            27,28,29,30,31,32,33,34,35, 
+            46,47,48,49,50,51,52,
+            81,82,83,84,85,86,87,88,89,90,
+            114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,
+            155,156,157,158,  
+            164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,  
+            202,203,204,205,206,207,208,209,210,211,212,213,214,214,215,216,217,218,219,220,221,222,223,224,225,226, 
+            242,243,244,245,246,247,248,249,250,251,252,253,254        ] 
+
+
+
+    slow = [53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,  
+            70,71,72,73,74,75,76,77,78,79,80,91,92,93,94,95,96,  
+            102,103,104,105,106,107,108,109,110,111,112,  191,192,193,194,195,196,197,198,199,200,201,202, 
+            227,228,229,230,231,232,233,234,235,236,237,238,239,240,241
+                    ] 
+
+    middle = [
+              15,16,17,18,19,20,21,22,24,25,26,
+              65,66,67,
+              97,98,99,100,101, 
+              113,114 ]
+
+
+    middle1 = [36,37,38,39,40,41,42,43,44,45,
+               144,145,146,147,148,149,150,151,152,153,154,155,
+               159,160,161,162,163,164, 185,186,187,188, 189,190,191]
+
+
+    reward = 21
+
+    if closest_waypoints[1] in left_lane and is_left_of_center:
+        reward += 10
+    elif closest_waypoints[1] in right_lane and not is_left_of_center:
+        reward += 10
+    elif closest_waypoints[1] in center_lane and center_variance < 0.35:
+        reward += 10
+    else:
+        reward -= 10
+
+
+    if closest_waypoints[1] in fast:
+        if speed == 4.0:
+            reward += 10
+        else:
+            reward -= 10
+
+    elif closest_waypoints[1] in slow:
+        if speed < 2.4:
+            reward += 10
+        else:
+            reward -= 10
+
+    elif closest_waypoints[1] in middle:
+        if speed == 2:
+            reward += 10
+        else:
+            reward -= 10
+
+    elif closest_waypoints[1] in middle1:
+        if speed == 3.5:
+            reward += 10
+        else:
+            reward -= 10
+
+
     return float(reward)
-
